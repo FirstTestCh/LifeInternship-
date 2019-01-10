@@ -14,7 +14,7 @@ class CreateTicketTable extends Migration {
 	{
 		Schema::create('ticket', function(Blueprint $table)
 		{
-			$table->integer('id')->primary('ticket_pkey');
+			$table->integer('id')->autoIncrement();;
 			$table->string('fio');
 			$table->string('email');
 			$table->string('phone_num', 50);

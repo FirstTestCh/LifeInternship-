@@ -14,9 +14,9 @@ class CreateCommentTable extends Migration {
 	{
 		Schema::create('comment', function(Blueprint $table)
 		{
-			$table->integer('id');
-			$table->string('content')->nullable();
-			$table->integer('ticket_id')->nullable();
+			$table->integer('id')->autoIncrement();
+			$table->string('content');
+			$table->integer('ticket_id');
 		});
 	}
 

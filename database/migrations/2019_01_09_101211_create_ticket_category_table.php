@@ -14,7 +14,7 @@ class CreateTicketCategoryTable extends Migration {
 	{
 		Schema::create('ticket_category', function(Blueprint $table)
 		{
-			$table->integer('id')->primary('ticket_category_pkey')->comment(' ');
+			$table->integer('id')->autoIncrement();
 			$table->string('name');
 		});
 	}
@@ -31,3 +31,4 @@ class CreateTicketCategoryTable extends Migration {
 	}
 
 }
+ 

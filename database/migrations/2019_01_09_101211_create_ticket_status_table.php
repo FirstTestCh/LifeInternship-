@@ -14,8 +14,8 @@ class CreateTicketStatusTable extends Migration {
 	{
 		Schema::create('ticket_status', function(Blueprint $table)
 		{
-			$table->integer('id')->primary('ticket_status_pkey');
-			$table->string('name')->nullable();
+			$table->integer('id')->autoIncrement();;
+			$table->string('name');
 		});
 	}
 
