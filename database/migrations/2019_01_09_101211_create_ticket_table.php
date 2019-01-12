@@ -15,9 +15,10 @@ class CreateTicketTable extends Migration {
 		Schema::create('ticket', function(Blueprint $table)
 		{
 			$table->integer('id')->autoIncrement();;
-			$table->string('fio');
+			$table->string('full_name');
 			$table->string('email');
 			$table->string('phone_num', 50);
+			$table->text('description');
 			$table->string('file_path')->nullable();
 			$table->integer('ticket_category')->nullable();
 			$table->integer('ticket_status')->nullable();
