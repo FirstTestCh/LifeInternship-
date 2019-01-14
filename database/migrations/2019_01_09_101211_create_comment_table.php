@@ -17,8 +17,13 @@ class CreateCommentTable extends Migration {
 			$table->integer('id')->autoIncrement();
 			$table->string('content');
 			$table->integer('ticket_id');
-			$table->integer('user_id');
+			$table->integer('user_id')->unsigned();;
 			
+			
+		});
+
+		Schema::table('comment', function(Blueprint $table)
+		{
 			$table->foreign('user_id')->references('id')->on('users');
 		});
 	}
