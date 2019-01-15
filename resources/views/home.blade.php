@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Панель тикетов</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,8 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    Здесь могла быть ваша реклама(Здесь будет круд панель)
                 </div>
             </div>
         </div>
