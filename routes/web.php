@@ -15,9 +15,7 @@
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('new-ticket');
-});
+Route::match(['get','post'], '/', 'NewTicketController@index');
 
 Auth::routes();
 

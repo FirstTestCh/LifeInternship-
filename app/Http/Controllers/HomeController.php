@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Ticket;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // $tickets = Ticket::all();
+        $tickets = Ticket::with('status')->with('category')->get();
+        return view('home')->with('tickets',$tickets);
     }
 }
