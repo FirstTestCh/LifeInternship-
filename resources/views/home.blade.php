@@ -43,7 +43,7 @@
                                         <li>{{$ticket->file}}</li>
                                     @endif
                                     <li>Category : {{$ticket->category->name}}</li>
-                                    <li class={{ color($ticket->category->id) }}>
+                                    <li class="{{ color($ticket->status->id) }}">
                                     Status : {{$ticket->status->name}}</li>
                                 </ul>
                                 <p>Description</p>

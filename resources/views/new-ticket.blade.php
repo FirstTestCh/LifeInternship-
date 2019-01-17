@@ -9,30 +9,49 @@
 
                 <div class="card-body">
                     <div class="container">
-                        {{-- <h1> Новый тикет </h1> --}}
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
+                        @csrf
+                          <div class="form-row">
+                              <div class="form-group col-lg">
+                                  <label for="full-name">ФИО:</label>
+                                  <input type="text" class="form-control {{ $errors->has('full-name') ? ' is-invalid' : '' }}"  name="full-name" id="">
+                                  <div class="form-text text-danger">{{$errors->first('full-name')}}</div>    
+                              </div>
+                              
+                              <div class="form-group col-lg">
+                                  <label for="email">Email:</label>
+                                  <input type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"  name="email" id="">    
+                                  <div class="form-text text-danger">{{$errors->first('email')}}</div>    
+                              </div>
+
+                              <div class="form-group col-lg">
+                                    <label for="phone">Номер:</label>
+                                    <input type="text" class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}"  name="phone" id="">    
+                                    <div class="form-text text-danger">{{$errors->first('phone')}}</div>    
+                                </div>
+                          </div>
+                          
+                          
                           <div class="form-group">
-                              @csrf
-                              <label for="full-name">ФИО:</label>
-                              <input type="text" class="form-control"  name="full-name" id=""><br>
-                              <label for="email">Email:</label>
-                              <input type="email" class="form-control"  name="email" id=""><br>
                               <label for="category">Категория</label>
-                              <select name="category" class="form-control">
+                              <select name="category" class="form-control {{ $errors->has('category') ? ' is-invalid' : '' }}">
                                   @foreach( $categories as $category ):
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                   @endforeach
                               </select>
                           </div>
-                          <div class="from-group">
-                              <label for="description">Сообщение:</label>
-                              <textarea class="form-control" id="description" rows="3"></textarea>
-                              <div class="form-group">
-                                <label for="exampleFormControlFile1">Файлы для прикрепления:</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                              </div>
                           
+                          <div class="from-group">
+                              <label for="description">Описание:</label>
+                              <textarea class="form-control {{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" id="description" rows="3"></textarea>
+                              <div class="form-text text-danger">{{$errors->first('description')}}</div>    
                           </div>
+
+                          <div class="form-group">  
+                            <label for="exampleFormControlFile1">Файлы для прикрепления:</label>
+                            <input type="file" class="form-control-file" name="attachment" id="exampleFormControlFile1">
+                          </div>
+
                           <button class="btn btn-primary" type="submit" name="submit">Создать Тикет</button>
                         </form>
                     </div>
