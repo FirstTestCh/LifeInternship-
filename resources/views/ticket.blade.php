@@ -20,7 +20,10 @@
                 </ul>
                 <p>Description</p>
                 <p>{{$ticket->description}}</p>
-               
+               <form method="post" action="/ticket/{{$ticket->hash}}/process">
+                    @csrf
+                    <input type="submit" value="In Process">
+                </form>
             </div>
         </div>
     </div>

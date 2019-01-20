@@ -18,6 +18,7 @@
 Route::any('/', 'NewTicketController@index');
 Route::post('/ticket-create', 'NewTicketController@form')->name('ticket.create');
 Route::get('/ticket/{hash}', 'TicketController@index')->name('ticket.index');
+Route::post('/ticket/{hash}/process', 'TicketController@process')->name('ticket.process');
 
 Auth::routes();
 
