@@ -19,7 +19,6 @@ class TicketController extends Controller
         $ticket = Ticket::where('hash', $hash)->first();
         $ticket->ticket_status = 3;
         $ticket->save();
-        return view('ticket', ['ticket' => $ticket]);
-
+        return back();
     }
 }
