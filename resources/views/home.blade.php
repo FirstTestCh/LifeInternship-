@@ -48,6 +48,7 @@
                                 </ul>
                                 <p>Description</p>
                                 <p>{{$ticket->description}}</p>
+                                <a href="/ticket/{{$ticket->hash}}"><button>Answer</button></a>
                             </div>
                         </div>
                     @endforeach 

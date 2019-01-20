@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\TicketCategory;
 use App\Models\Ticket;
 use Validator;
-
+use Hash;
 class NewTicketController extends Controller
 {
     public function index(Request $request){
@@ -40,6 +40,7 @@ class NewTicketController extends Controller
         $ticket->description = $request->get('description');
         $ticket->ticket_category = $request->get('category');
         $ticket->ticket_status = 1;    
+        $ticket->hash=md5($ticket->id.$ticket->full_name.$ticket->email);
 
         if($request->hasFile('attachment')){
             $file = $request->file('attachment');
@@ -49,6 +50,8 @@ class NewTicketController extends Controller
         }
 
         $ticket->save();
+        $hash=$ticket->description.$ticket->email;
+        
         return view('ticket-created');
     }
 }

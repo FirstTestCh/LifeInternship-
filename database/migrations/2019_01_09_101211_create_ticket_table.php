@@ -22,6 +22,7 @@ class CreateTicketTable extends Migration {
 			$table->string('file_path')->nullable();
 			$table->integer('ticket_category')->nullable();
 			$table->integer('ticket_status')->nullable();
+			$table->string('hash');
 		});
 	}
 
