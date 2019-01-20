@@ -11,7 +11,7 @@ class NewTicketController extends Controller
 {
     public function index(Request $request){
         $data = [
-            'categories' => TicketCategory::all(),
+            'categories' => TicketCategory::orderBy('id', 'desc')->get(),
         ];
         return view('new-ticket',$data);
     }

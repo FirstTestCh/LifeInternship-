@@ -57,6 +57,9 @@
                                     <a class="dropdown-item" href="/home">
                                         Панель Тикетов
                                     </a>
+                                    <a class="dropdown-item" href="/ticketCategories">
+                                        Категории
+                                    </a>
                                     <a class="dropdown-item" href="/">
                                         Новый тикет
                                     </a>

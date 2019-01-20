@@ -41,7 +41,7 @@
                               </select>
                           </div>
                           
-                          <div class="from-group">
+                          <div class="form-group">
                               <label for="description">Описание:</label>
                               <textarea class="form-control {{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" id="description" rows="3">{{old('description')}}</textarea>
                               <div class="form-text text-danger">{{$errors->first('description')}}</div>    

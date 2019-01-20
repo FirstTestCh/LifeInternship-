@@ -20,6 +20,8 @@ Route::post('/ticket-create', 'NewTicketController@form')->name('ticket.create')
 Route::get('/ticket/{hash}', 'TicketController@index')->name('ticket.index');
 Route::post('/ticket/{hash}/process', 'TicketController@process')->name('ticket.process');
 
+Route::resource('ticketCategories', 'TicketCategoriesController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
