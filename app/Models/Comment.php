@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     public $table = "comment";
-    public $timestamps = false; 
 
     public function ticket(){
         return $this->belongsTo('App\Models\Ticket', 'ticket_id', 'id');

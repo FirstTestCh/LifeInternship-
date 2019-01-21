@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     public $table = "ticket";
-    public $timestamps = false; 
     
     public function comments(){
         return $this->hasMany('App\Models\Comment','ticket_id','id');

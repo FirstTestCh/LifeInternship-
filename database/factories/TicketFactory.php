@@ -8,5 +8,8 @@ $factory->define(App\Models\Ticket::class, function (Faker $faker) {
         'email' => $faker->email,
         'phone_num' => $faker->tollFreePhoneNumber,
         'description' => $faker->text,
+        'hash' => md5(str_random()),
+        'created_at' => now(),
+        'updated_at' => now()
     ];
 });
