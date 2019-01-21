@@ -25,6 +25,7 @@ class TicketController extends Controller
     }
     public function process(Request $request, $hash)
     {
+        $this->ticket = Ticket::where('hash', $hash)->first();
         $this->ticket->ticket_status = 3;
         $this->ticket->save();
         return back();
