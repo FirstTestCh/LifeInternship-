@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $tickets = Ticket::all();
         $tickets = Ticket::with('status')->with('category')->orderBy('created_at','desc')->orderBy('ticket_status')->get();
         return view('home')->with('tickets',$tickets);
     }

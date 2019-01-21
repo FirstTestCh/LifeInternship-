@@ -48,7 +48,9 @@
                                 </ul>
                                 <p>Description</p>
                                 <p>{{$ticket->description}}</p>
-                                <a href="/ticket/{{$ticket->hash}}"><button>Answer</button></a>
+                                @if (Auth::user()->isAdmin())
+                                    <a href="/ticket/{{$ticket->hash}}"><button>Answer</button></a>
+                                @endif
                             </div>
                         </div>
                     @endforeach 
