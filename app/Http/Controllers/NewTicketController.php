@@ -52,6 +52,6 @@ class NewTicketController extends Controller
         $ticket->save();
         $hash=$ticket->description.$ticket->email;
         
-        return view('ticket-created');
+        return redirect('/ticket/'.$ticket->hash);
     }
 }

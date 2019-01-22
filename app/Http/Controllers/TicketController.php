@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ticket;
+use App\Models\Comment;
 use Mail;
 use Auth;
 
@@ -16,12 +17,36 @@ class TicketController extends Controller
     public function index(Request $request, $hash)
     {
         $ticket = Ticket::where('hash', $hash)->first();
-        if ($ticket->ticket_status == 1) {
+        if (Auth::user()->isAdmin() && $ticket->ticket_status == 1) {
             $ticket->ticket_status = 2;
             $ticket->save();
         }
         return view('ticket', ['ticket' => $ticket]);
     }
+
+    public function comment(Request $request, $hash)
+    {
+        $ticket = Ticket::where('hash', $hash)->first();
+
+        $comment = new Comment;
+
+        $comment->content = request('content');
+        $comment->ticket_id = $ticket->id;
+        $comment->user_id = Auth::check() ? Auth::user()->id : NULL;
+        $comment->admin_only = request('admin_only') ? TRUE : FALSE;
+
+        $comment->save();
+
+        if ($comment->admin_only == FALSE) {
+            $ticket->ticket_status = 4;
+            $ticket->save();
+
+            $this->Answered($hash);
+        }
+
+        return redirect('/ticket/'.$hash);
+    }
+
     public function process(Request $request, $hash)
     {
         $ticket = Ticket::where('hash', $hash)->first();
