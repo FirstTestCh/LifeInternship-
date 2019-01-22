@@ -4,8 +4,9 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card mb-4">
-            <div class="card-header bg-light text-primary">
-                {{$ticket->full_name}}
+            <div class="card-header d-flex justify-content-between text-primary">
+                <div>{{ $ticket->full_name }}</div>
+                <div class="text-secondary">{{ $ticket->created_at }}</div>
             </div>
             <div class="card-body">
                 <ul>

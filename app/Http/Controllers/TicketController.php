@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ticket;
+use App\Models\TicketCategory;
+use App\Models\TicketStatus;
 use App\Models\Comment;
 use Mail;
 use Auth;
@@ -27,7 +29,49 @@ class TicketController extends Controller
     public function my(Request $request)
     {
         $tickets = Ticket::where('user_id', Auth::user()->id)->get();
-        return view('home', ['tickets' => $tickets]);
+        $ticketCategories = TicketCategory::all();
+        $ticketStatuses = TicketStatus::all();
+
+        return view('home', [
+            'tickets' => $tickets,
+            'categories' => $ticketCategories,
+            'statuses' => $ticketStatuses
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $ticketCategories = TicketCategory::all();
+        $ticketStatuses = TicketStatus::all();
+
+        $tickets = Ticket::query();
+
+        if ($request->filled('category')) {
+            $tickets->where('ticket_category', $request->get('category'));
+        }
+
+        if ($request->filled('status')) {
+            $tickets->where('ticket_status', $request->get('status'));
+        }
+
+        if ($request->filled('query')) {
+            $tickets->where(function($query) use($request) {
+                $query->where('full_name', 'like', '%'.$request->get('query').'%')
+                ->orWhere('email', 'like', '%'.$request->get('query').'%')
+                ->orWhere('phone_num', 'like', '%'.$request->get('query').'%')
+                ->orWhere('description', 'like', '%'.$request->get('query').'%');
+            });
+        }
+
+        $tickets = $tickets->orderBy('created_at','desc')->orderBy('ticket_status')->get();
+
+        $request->flash();
+
+        return view('home', [
+            'tickets' => $tickets,
+            'categories' => $ticketCategories,
+            'statuses' => $ticketStatuses
+        ]);
     }
 
     public function comment(Request $request, $hash)
