@@ -24,6 +24,12 @@ class TicketController extends Controller
         return view('ticket', ['ticket' => $ticket]);
     }
 
+    public function my(Request $request)
+    {
+        $tickets = Ticket::where('user_id', Auth::user()->id)->get();
+        return view('home', ['tickets' => $tickets]);
+    }
+
     public function comment(Request $request, $hash)
     {
         $ticket = Ticket::where('hash', $hash)->first();

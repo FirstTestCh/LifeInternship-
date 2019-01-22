@@ -65,6 +65,7 @@
                                     <a class="dropdown-item" href="/">
                                         Новый тикет
                                     </a>
+                                    <a class="dropdown-item" href="/my/ticket">Мои тикеты</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

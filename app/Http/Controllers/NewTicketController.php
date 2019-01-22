@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TicketCategory;
 use App\Models\Ticket;
+use Auth;
 use Validator;
 use Hash;
+
 class NewTicketController extends Controller
 {
     public function index(Request $request){
