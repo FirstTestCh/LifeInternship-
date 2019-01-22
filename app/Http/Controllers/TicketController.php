@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Ticket;
 use Mail;
 use Auth;
+use App\MailSender;
 
 class TicketController extends Controller
 {
@@ -27,20 +28,11 @@ class TicketController extends Controller
         $ticket = Ticket::where('hash', $hash)->first();
         $ticket->ticket_status = 3;
         $ticket->save();
-        $this->Answered($hash);
         return back();
     }
-    public function Answered($hash)
+    public function answered($hash)
     {
-        $ticket= Ticket::where('hash', $hash)->first();
-        $this->category = $ticket->category->name;
-        $hashLink = "http://127.0.0.1:8000/ticket/$hash";
-        $message_Raw = "Мы ответили на ваш вопрос, можете посмотреть ответ на него здесь - $hashLink";
-        $this->mailTo = $ticket->email;
-        $this->mailFrom = "lifeinternchoco@gmail.com";
-        Mail::raw($message_Raw, function ($message) {
-            $message->from($this->mailFrom);
-            $message->to($this->mailTo)->subject("Ответ на ваш $this->category");
-        });
+        $ticket = Ticket::where('hash', $hash)->first();
+        $ticket->ticket_status = 4;
     }
 }

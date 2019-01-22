@@ -37,20 +37,18 @@
                             </div>
                             <div class="card-body">
                                 <ul>
-                                    <li>Email: {{$ticket->email}}</li>
-                                    <li>Phone: {{$ticket->phone_num}}</li>
-                                    @if ($ticket->file) 
-                                        <li>{{$ticket->file}}</li>
-                                    @endif
-                                    <li>Category : {{$ticket->category->name}}</li>
-                                    <li class="{{ color($ticket->status->id) }}">
-                                    Status : {{$ticket->status->name}}</li>
+                                        <li>Email: {{$ticket->email}}</li>
+                                        <li>Phone: {{$ticket->phone_num}}</li>
+                                        @if ($ticket->file) 
+                                            <li>{{$ticket->file}}</li>
+                                        @endif
+                                        <li>Category : {{$ticket->category->name}}</li>
+                                        <li class="{{ color($ticket->status->id) }}">
+                                        Status : {{$ticket->status->name}}</li>
                                 </ul>
                                 <p>Description</p>
                                 <p>{{$ticket->description}}</p>
-                                @if (Auth::user()->isAdmin())
-                                    <a href="/ticket/{{$ticket->hash}}"><button>Answer</button></a>
-                                @endif
+                                <a href="/ticket/{{$ticket->hash}}"><button>Answer</button></a>
                             </div>
                         </div>
                     @endforeach 

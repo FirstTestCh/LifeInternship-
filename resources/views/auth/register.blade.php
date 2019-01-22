@@ -78,12 +78,12 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-3 offset-md-4">
                                 <button type="submit" class="btn btn-primary" name="role" value="0">
-                                    Я Администратор
+                                    Разработчик
                                 </button>
                             </div>
                             <div class="col-md-3">
                                 <button type="submit" class="btn btn-primary" name="role" value="1">
-                                    Я админ СЗП
+                                    СЗП
                                 </button>
                             </div>
                         </div>
