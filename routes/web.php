@@ -18,7 +18,6 @@ Route::middleware(['auth'])->group(function () {
     Route::any('/new-ticket', 'NewTicketController@index');
     Route::post('/ticket-create', 'NewTicketController@form')->name('ticket.create');
     Route::get('/my/ticket', 'TicketController@my')->name('ticket.my');
-    Route::get('/search/ticket', 'TicketController@search')->name('ticket.search');
     Route::get('/ticket/{hash}', 'TicketController@index')->name('ticket.index');
 	Route::post('/ticket/{hash}', 'TicketController@comment')->name('ticket.comment');
     Route::post('/ticket/{hash}/process', 'TicketController@process')->name('ticket.process');
@@ -27,3 +26,4 @@ Route::middleware(['auth'])->group(function () {
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/search/ticket', 'TicketController@search')->name('ticket.search');
