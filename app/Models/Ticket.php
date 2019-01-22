@@ -28,6 +28,11 @@ class Ticket extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
+    public function admin()
+    {
+        return $this->belongsTo('App\User', 'admin_id');
+    }
+
     public function statusColor()
     {
         switch($this->status()->first()->id) {

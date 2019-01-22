@@ -9,6 +9,7 @@
             </div>
             <div class="card-body">
                 <ul>
+                    <li>Автор: {{ $ticket->user->name }}</li>
                     <li>Email: {{$ticket->email}}</li>
                     <li>Номер: {{$ticket->phone_num}}</li>
                     @if ($ticket->file) 
@@ -16,6 +17,9 @@
                     @endif
                     <li>Категория: {{$ticket->category->name}}</li>
                     <li class="{{ $ticket->statusColor() }}">Статус: {{$ticket->status->name}}</li>
+                    @if ($ticket->admin_id)
+                        <li>Админ: {{ $ticket->admin->name }}</li>
+                    @endif
                 </ul>
                 <p>Описание</p>
                 <p>{{$ticket->description}}</p>

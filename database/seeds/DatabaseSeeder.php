@@ -16,10 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TicketStatusSeeder::class);
         
         if (App::environment() === 'local') //development
-        {
-            $this->call(TicketCategorySeeder::class);
-            $this->call(TicketSeeder::class);
-            
+        {   
             // Admin
             DB::table('users')->insert([
                 'email' => 'admin@chocolife.me',
@@ -35,6 +32,9 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('secret'),
                 'role' => 1,
             ]);
+
+            $this->call(TicketCategorySeeder::class);
+            $this->call(TicketSeeder::class);
         }
         
         

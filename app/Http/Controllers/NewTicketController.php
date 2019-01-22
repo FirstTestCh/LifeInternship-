@@ -49,6 +49,8 @@ class NewTicketController extends Controller
             $ticket->file_path = $file_name;
         }
 
+        $ticket->user_id = Auth::user()->id;
+
         $ticket->save();
         $hash=$ticket->description.$ticket->email;
         

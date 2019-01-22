@@ -51,10 +51,12 @@ class TicketController extends Controller
     {
         $ticket = Ticket::where('hash', $hash)->first();
         $ticket->ticket_status = 3;
+        $ticket->admin_id = Auth::user()->id;
         $ticket->save();
         $this->Answered($hash);
         return back();
     }
+
     public function Answered($hash)
     {
         $ticket= Ticket::where('hash', $hash)->first();
