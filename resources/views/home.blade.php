@@ -20,22 +20,6 @@
                                     @endforeach
                                 </select>
                             </div>
-<<<<<<< HEAD
-                            <div class="card-body">
-                                <ul>
-                                        <li>Email: {{$ticket->email}}</li>
-                                        <li>Phone: {{$ticket->phone_num}}</li>
-                                        @if ($ticket->file) 
-                                            <li>{{$ticket->file}}</li>
-                                        @endif
-                                        <li>Category : {{$ticket->category->name}}</li>
-                                        <li class="{{ color($ticket->status->id) }}">
-                                        Status : {{$ticket->status->name}}</li>
-                                </ul>
-                                <p>Description</p>
-                                <p>{{$ticket->description}}</p>
-                                <a href="/ticket/{{$ticket->hash}}"><button>Answer</button></a>
-=======
                             <div class="form-group col-md-3">
                                 <label for="categorySelect">Статус</label>
 
@@ -58,7 +42,6 @@
 
                             <div class="form-group col-md-3">
                                 <button class="btn btn-primary w-100">Искать</button>
->>>>>>> ee86e53e71adda3394156a5fa0b4ec89d09174dd
                             </div>
                         </div>
                     </form>
