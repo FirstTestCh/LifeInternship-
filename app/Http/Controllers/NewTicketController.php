@@ -14,10 +14,8 @@ class NewTicketController extends Controller
 {
     public function index(Request $request)
     {
-        $data = [
-            'categories' => TicketCategory::orderBy('id', 'desc')->get(),
-        ];
-        return view('new-ticket', $data);
+        $categories = TicketCategory::orderBy('id', 'desc')->get();
+        return view('new-ticket', compact('categories'));
     }
 
     public function form(Request $request)
@@ -30,10 +28,11 @@ class NewTicketController extends Controller
             'phone' => 'required',
             'category' => 'required',
             'description' => 'required',
+            'attachment' => 'file|max:10240' // 10 mb
         ]);
 
         if ($validator->fails()) {
-            return redirect('/')
+            return back()
                 ->withErrors($validator)
                 ->withInput();
         }

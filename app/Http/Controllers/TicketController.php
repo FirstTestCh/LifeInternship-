@@ -13,9 +13,6 @@ use App\MailSender;
 
 class TicketController extends Controller
 {
-    protected $mailFrom;
-    protected $mailTo;
-    protected $category;
 
     public function index(Request $request, $hash)
     {
@@ -111,5 +108,14 @@ class TicketController extends Controller
     {
         $ticket = Ticket::where('hash', $hash)->first();
         $ticket->ticket_status = 4;
+    }
+
+    public function attachment($hash){
+        $ticket = Ticket::where('hash', $hash)->first();
+        $file_path = storage_path().'/app/attachments/'.$ticket->file_path;
+        if( !file_exists($file_path) ){
+            abort(404); // не должен случиться, но кто знает...
+        }
+        return response()->file($file_path);
     }
 }

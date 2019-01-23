@@ -24,6 +24,11 @@
                 </ul>
                 <p>Описание</p>
                 <p>{{$ticket->description}}</p>
+                @if ($ticket->file_path)
+                    <a target="_blank" rel="noopener noreferrer" href={{ route('ticket.attachment', ['hash' => $ticket->hash]) }}>
+                        <button class="my-2">Прикрепленный файл</button>
+                    </a>
+                @endif
                 @if (Auth::check() && Auth::user()->isAdmin())
                    <form method="post" action="/ticket/{{$ticket->hash}}/process">
                         @csrf
