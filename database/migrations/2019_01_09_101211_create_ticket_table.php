@@ -22,8 +22,17 @@ class CreateTicketTable extends Migration {
 			$table->string('file_path')->nullable();
 			$table->integer('ticket_category')->nullable();
 			$table->integer('ticket_status')->nullable();
+			$table->integer('user_id')->unsigned();
+			$table->integer('admin_id')->unsigned()->nullable();
 			$table->string('hash');
 			$table->timestamps();
+		});
+
+		Schema::table('ticket', function(Blueprint $table)
+		{
+			$table->foreign('user_id')->references('id')->on('users');
+			$table->foreign('admin_id')->references('id')->on('users');
+
 		});
 	}
 

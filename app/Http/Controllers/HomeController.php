@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ticket;
+use App\Models\TicketCategory;
+use App\Models\TicketStatus;
 
 class HomeController extends Controller
 {
@@ -25,6 +27,13 @@ class HomeController extends Controller
     public function index()
     {
         $tickets = Ticket::with('status')->with('category')->orderBy('created_at','desc')->orderBy('ticket_status')->get();
-        return view('home')->with('tickets',$tickets);
+        $ticketCategories = TicketCategory::all();
+        $ticketStatuses = TicketStatus::all();
+
+        return view('home', [
+            'tickets' => $tickets,
+            'categories' => $ticketCategories,
+            'statuses' => $ticketStatuses
+        ]);
     }
 }

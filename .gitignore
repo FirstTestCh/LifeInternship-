@@ -12,3 +12,4 @@ yarn-error.log
 migrate.bat
 *.sqlite
 .vscode
+.DS_Store

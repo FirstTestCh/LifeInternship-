@@ -57,12 +57,15 @@
                                     <a class="dropdown-item" href="/home">
                                         Панель Тикетов
                                     </a>
-                                    <a class="dropdown-item" href="/ticketCategories">
-                                        Категории
-                                    </a>
+                                    @if (Auth::user()->isAdmin())
+                                        <a class="dropdown-item" href="/ticketCategories">
+                                            Категории
+                                        </a>
+                                    @endif
                                     <a class="dropdown-item" href="/">
                                         Новый тикет
                                     </a>
+                                    <a class="dropdown-item" href="/my/ticket">Мои тикеты</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

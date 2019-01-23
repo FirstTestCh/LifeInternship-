@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TicketCategory;
 use App\Models\Ticket;
-use Validator;
 use Auth;
+use Validator;
 use Hash;
 use App\MailSender;
 
@@ -57,8 +57,9 @@ class NewTicketController extends Controller
         $hashLink = "http://127.0.0.1:8000/ticket/$hash";
         $messageRaw = "Спасибо за обращение в службу технической поддержки ChocoLife. Можете отслеживать ваш запрос здесь: $hashLink .";
         $mailTo = Auth::user()->email;
+        $ticket->user_id = Auth::user()->id;
         $ticket->save();
         MailSender::send($messageRaw, $mailTo, $hash);
-        return view('ticket-created');
+        return redirect('/ticket/' . $hash);
     }
 }

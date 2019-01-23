@@ -21,10 +21,10 @@
 
 						<div class="input-group">
 							<input type="text" name="name" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-							placeholder="Name" value="{{ old('name') ? old('name') : '' }}">
+							placeholder="Название" value="{{ old('name') ? old('name') : '' }}">
 
 							<div class="input-group-append">
-								<button class="btn btn-outline-success">Create</button>
+								<button class="btn btn-outline-success">Создать</button>
 							</div>
 						</div>
 					</form>
