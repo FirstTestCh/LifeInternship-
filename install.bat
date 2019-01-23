@@ -1,6 +1,6 @@
-echo "Composer install...";
-composer install;
-echo "Generating keys...";
-php artisan key:generate;
-echo "Running php artisan migrate:fresh --seed";
-php artisan migrate:fresh --seed;
+echo "Composer install..."
+call composer install
+echo "Running php artisan migrate:fresh --seed"
+call php artisan migrate:fresh --seed
+echo "Generating keys..."
+call php artisan key:generate
