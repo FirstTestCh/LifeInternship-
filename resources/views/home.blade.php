@@ -50,11 +50,12 @@
                         @foreach ($tickets as $ticket)
                             <div class="card {{ $loop->last ? '' : 'mb-3' }}">
                                 <div class="card-header d-flex justify-content-between text-primary">
-                                    <div>{{ $ticket->full_name }}</div>
+                                    <div> {{ $ticket->user->name }}</div>
                                     <div class="text-secondary">{{ $ticket->created_at }}</div>
                                 </div>
                                 <div class="card-body">
                                     <ul>
+                                        <li>Имя:{{ $ticket->full_name }}</li>
                                         <li>Email: {{$ticket->email}}</li>
                                         <li>Номер: {{$ticket->phone_num}}</li>
                                         @if ($ticket->file) 
@@ -70,6 +71,8 @@
                                     <p>{{$ticket->description}}</p>
                                     @if (Auth::user()->isAdmin())
                                         <a href="/ticket/{{$ticket->hash}}"><button>Ответить</button></a>
+                                    @else
+                                        <a href="/ticket/{{$ticket->hash}}"><button>Посмотреть</button></a>
                                     @endif
                                 </div>
                             </div>

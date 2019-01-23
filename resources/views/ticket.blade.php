@@ -30,7 +30,7 @@
                     </a>
                 @endif
                 @if (Auth::check() && Auth::user()->isAdmin())
-                   <form method="post" action="/ticket/{{$ticket->hash}}/process">
+                   <form method="post" action={{ route('ticket.process', ['hash' => $ticket->hash]) }}>
                         @csrf
                         <input type="submit" value="В обработке">
                     </form>

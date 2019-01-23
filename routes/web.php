@@ -9,23 +9,22 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/',function(Request $request){
+    Route::get('/', function (Request $request) {
         return redirect('/new-ticket');
     });
 
     Route::any('/new-ticket', 'NewTicketController@index');
     Route::post('/ticket-create', 'NewTicketController@form')->name('ticket.create');
-
     Route::get('/my/ticket', 'TicketController@my')->name('ticket.my');
     Route::get('/ticket/{hash}', 'TicketController@index')->name('ticket.index');
-	Route::post('/ticket/{hash}', 'TicketController@comment')->name('ticket.comment');
+    Route::post('/ticket/{hash}', 'TicketController@comment')->name('ticket.comment');
     Route::post('/ticket/{hash}/process', 'TicketController@process')->name('ticket.process');
-    Route::get('/ticket/{hash}/attachment','TicketController@attachment')->name('ticket.attachment');
+    Route::get('/ticket/{hash}/attachment', 'TicketController@attachment')->name('ticket.attachment');
 
-    Route::resource('ticketCategories', 'TicketCategoriesController')->middleware('can:access-categories');    
+    Route::resource('ticketCategories', 'TicketCategoriesController')->middleware('can:access-categories');
 });
 
 Auth::routes();

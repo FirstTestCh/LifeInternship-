@@ -17,6 +17,9 @@ class TicketController extends Controller
     public function index(Request $request, $hash)
     {
         $ticket = Ticket::where('hash', $hash)->first();
+        if (is_null($ticket)) {
+            abort(404);
+        }
         if (Auth::user()->isAdmin() && $ticket->ticket_status == 1) {
             $ticket->ticket_status = 2;
             $ticket->save();
@@ -53,15 +56,15 @@ class TicketController extends Controller
         }
 
         if ($request->filled('query')) {
-            $tickets->where(function($query) use($request) {
-                $query->where('full_name', 'like', '%'.$request->get('query').'%')
-                ->orWhere('email', 'like', '%'.$request->get('query').'%')
-                ->orWhere('phone_num', 'like', '%'.$request->get('query').'%')
-                ->orWhere('description', 'like', '%'.$request->get('query').'%');
+            $tickets->where(function ($query) use ($request) {
+                $query->where('full_name', 'like', '%' . $request->get('query') . '%')
+                    ->orWhere('email', 'like', '%' . $request->get('query') . '%')
+                    ->orWhere('phone_num', 'like', '%' . $request->get('query') . '%')
+                    ->orWhere('description', 'like', '%' . $request->get('query') . '%');
             });
         }
 
-        $tickets = $tickets->orderBy('created_at','desc')->orderBy('ticket_status')->get();
+        $tickets = $tickets->orderBy('created_at', 'desc')->orderBy('ticket_status')->get();
 
         $request->flash();
 
@@ -75,45 +78,49 @@ class TicketController extends Controller
     public function comment(Request $request, $hash)
     {
         $ticket = Ticket::where('hash', $hash)->first();
-
+        if (is_null($ticket)) {
+            abort(404);
+        }
         $comment = new Comment;
 
         $comment->content = request('content');
         $comment->ticket_id = $ticket->id;
-        $comment->user_id = Auth::check() ? Auth::user()->id : NULL;
-        $comment->admin_only = request('admin_only') ? TRUE : FALSE;
-
+        $comment->user_id = Auth::check() ? Auth::user()->id : null;
+        $comment->admin_only = request('admin_only') ? true : false;
         $comment->save();
 
-        if ($comment->admin_only == FALSE) {
+        if ($comment->admin_only == false && Auth::check() && Auth::user()->isAdmin()) {
             $ticket->ticket_status = 4;
             $ticket->save();
-
-            $this->Answered($hash);
+            //have to email ?
         }
+        
 
-        return redirect('/ticket/'.$hash);
+        return redirect('/ticket/' . $hash);
     }
 
     public function process(Request $request, $hash)
     {
         $ticket = Ticket::where('hash', $hash)->first();
+        if (is_null($ticket)) {
+            abort(404);
+        }
         $ticket->ticket_status = 3;
         $ticket->admin_id = Auth::user()->id;
         $ticket->save();
         return back();
     }
 
-    public function Answered($hash)
+
+
+    public function attachment($hash)
     {
         $ticket = Ticket::where('hash', $hash)->first();
-        $ticket->ticket_status = 4;
-    }
-
-    public function attachment($hash){
-        $ticket = Ticket::where('hash', $hash)->first();
-        $file_path = storage_path().'/app/attachments/'.$ticket->file_path;
-        if( !file_exists($file_path) ){
+        if (is_null($ticket)) {
+            abort(404);
+        }
+        $file_path = storage_path() . '/app/attachments/' . $ticket->file_path;
+        if (!file_exists($file_path)) {
             abort(404); // не должен случиться, но кто знает...
         }
         return response()->file($file_path);

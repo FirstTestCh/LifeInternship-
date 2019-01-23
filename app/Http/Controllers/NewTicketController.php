@@ -53,8 +53,7 @@ class NewTicketController extends Controller
             $ticket->file_path = $file_name;
         }
         $hash = $ticket->hash;
-        $hashLink = "http://127.0.0.1:8000/ticket/$hash";
-        $messageRaw = "Спасибо за обращение в службу технической поддержки ChocoLife. Можете отслеживать ваш запрос здесь: $hashLink .";
+        $messageRaw = "Спасибо за обращение в службу технической поддержки ChocoLife. Можете отслеживать ваш запрос здесь:";
         $mailTo = Auth::user()->email;
         $ticket->user_id = Auth::user()->id;
         $ticket->save();
