@@ -44,7 +44,8 @@ class NewTicketController extends Controller
         $ticket->description = $request->get('description');
         $ticket->ticket_category = $request->get('category');
         $ticket->ticket_status = 1;
-        $ticket->hash = md5($ticket->id . $ticket->full_name . $ticket->email);
+        $mytime =  date('Y-m-d H:i:s');
+        $ticket->hash = md5($ticket->id . $mytime . $ticket->full_name . $ticket->email);
 
         if ($request->hasFile('attachment')) {
             $file = $request->file('attachment');
