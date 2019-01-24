@@ -21,10 +21,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/ticket/{ticket}', 'TicketController@comment')->name('ticket.comment');
     Route::post('/ticket/{ticket}/process', 'TicketController@process')->name('ticket.process');
     Route::get('/ticket/{ticket}/attachment', 'TicketController@attachment')->name('ticket.attachment');
-
+    Route::get('/search/ticket', 'TicketController@search')->name('ticket.search');
+    
     Route::resource('ticket-categories', 'TicketCategoriesController')->middleware('can:access-categories');
 });
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/search/ticket', 'TicketController@search')->name('ticket.search');

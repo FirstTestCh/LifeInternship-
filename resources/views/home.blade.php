@@ -68,7 +68,7 @@
                                     </ul>
                                     <p>Описание</p>
                                     <p>{{$ticket->description}}</p>
-                                    @if (Auth::user()->isAdmin())
+                                    @if (Auth::user() && Auth::user()->isAdmin())
                                         <a href="/ticket/{{$ticket->hash}}"><button>Ответить</button></a>
                                     @else
                                         <a href="/ticket/{{$ticket->hash}}"><button>Посмотреть</button></a>
