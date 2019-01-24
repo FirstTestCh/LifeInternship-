@@ -14,15 +14,15 @@
 Route::redirect('/', '/new-ticket');
 Route::get('/new-ticket', 'NewTicketController@index');
 Route::post('/ticket-create', 'NewTicketController@form')->name('ticket.create');
-Route::get('/ticket/{hash}', 'TicketController@index')->name('ticket.index');
+Route::get('/ticket/{ticket}', 'TicketController@index')->name('ticket.index');
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::post('/ticket/{hash}', 'TicketController@comment')->name('ticket.comment');
-    Route::post('/ticket/{hash}/process', 'TicketController@process')->name('ticket.process');
-    Route::get('/ticket/{hash}/attachment', 'TicketController@attachment')->name('ticket.attachment');
+    Route::post('/ticket/{ticket}', 'TicketController@comment')->name('ticket.comment');
+    Route::post('/ticket/{ticket}/process', 'TicketController@process')->name('ticket.process');
+    Route::get('/ticket/{ticket}/attachment', 'TicketController@attachment')->name('ticket.attachment');
 
-    Route::resource('ticketCategories', 'TicketCategoriesController')->middleware('can:access-categories');
+    Route::resource('ticket-categories', 'TicketCategoriesController')->middleware('can:access-categories');
 });
 
 Auth::routes();

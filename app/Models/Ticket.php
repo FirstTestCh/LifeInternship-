@@ -48,4 +48,9 @@ class Ticket extends Model
                 return "text-muted";
         }
     }
+
+    public function getRouteKeyName()
+    {
+        return 'hash';
+    }
 }

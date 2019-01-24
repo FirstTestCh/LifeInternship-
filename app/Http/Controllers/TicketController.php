@@ -14,30 +14,13 @@ use App\MailSender;
 class TicketController extends Controller
 {
 
-    public function index(Request $request, $hash)
+    public function index(Request $request, Ticket $ticket)
     {
-        $ticket = Ticket::where('hash', $hash)->first();
-        if (is_null($ticket)) {
-            abort(404);
-        }
         if (Auth::user() && Auth::user()->isAdmin() && $ticket->ticket_status == 1) {
             $ticket->ticket_status = 2;
             $ticket->save();
         }
         return view('ticket', ['ticket' => $ticket]);
-    }
-
-    public function my(Request $request)
-    {
-        $tickets = Ticket::where('user_id', Auth::user()->id)->get();
-        $ticketCategories = TicketCategory::all();
-        $ticketStatuses = TicketStatus::all();
-
-        return view('home', [
-            'tickets' => $tickets,
-            'categories' => $ticketCategories,
-            'statuses' => $ticketStatuses
-        ]);
     }
 
     public function search(Request $request)
@@ -75,12 +58,8 @@ class TicketController extends Controller
         ]);
     }
 
-    public function comment(Request $request, $hash)
+    public function comment(Request $request, Ticket $ticket)
     {
-        $ticket = Ticket::where('hash', $hash)->first();
-        if (is_null($ticket)) {
-            abort(404);
-        }
         $comment = new Comment;
 
         $comment->content = request('content');
@@ -93,35 +72,25 @@ class TicketController extends Controller
             $ticket->ticket_status = 4;
             $ticket->save();
             $messageRaw="Вам ответили на почту";
-            MailSender::send($messageRaw,  $hash);
+            MailSender::send($messageRaw,  $ticket->hash);
 
             //have to email ?
         }
 
 
-        return redirect('/ticket/' . $hash);
+        return redirect('/ticket/' . $ticket->hash);
     }
 
-    public function process(Request $request, $hash)
+    public function process(Request $request, Ticket $ticket)
     {
-        $ticket = Ticket::where('hash', $hash)->first();
-        if (is_null($ticket)) {
-            abort(404);
-        }
         $ticket->ticket_status = 3;
         $ticket->admin_id = Auth::user()->id;
         $ticket->save();
         return back();
     }
 
-
-
-    public function attachment($hash)
+    public function attachment(Ticket $ticket)
     {
-        $ticket = Ticket::where('hash', $hash)->first();
-        if (is_null($ticket)) {
-            abort(404);
-        }
         $file_path = storage_path() . '/app/attachments/' . $ticket->file_path;
         if (!file_exists($file_path)) {
             abort(404); // не должен случиться, но кто знает...
