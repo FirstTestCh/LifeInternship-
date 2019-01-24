@@ -50,7 +50,6 @@
                         @foreach ($tickets as $ticket)
                             <div class="card {{ $loop->last ? '' : 'mb-3' }}">
                                 <div class="card-header d-flex justify-content-between text-primary">
-                                    <div> {{ $ticket->user->name }}</div>
                                     <div class="text-secondary">{{ $ticket->created_at }}</div>
                                 </div>
                                 <div class="card-body">

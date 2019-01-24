@@ -10,7 +10,6 @@
             </div>
             <div class="card-body">
                 <ul>
-                    <li>Автор: {{ $ticket->user->name }}</li>
                     <li>Email: {{$ticket->email}}</li>
                     <li>Номер: {{$ticket->phone_num}}</li>
                     @if ($ticket->file) 
@@ -37,7 +36,18 @@
                 @endif
             </div>
         </div>
+    @foreach ($ticket->comments as $comment)
+        <div class="card mb-4 {{ $comment->admin_only ? 'border-secondary' : '' }}">
+            <div class="card-header d-flex justify-content-between">
+                <div>{{ $comment->user->name }}</div>
 
+                <div class="text-secondary">{{ $comment->created_at }}</div>
+            </div>
+
+            <div class="card-body">{{ $comment->content }}</div>
+        </div>
+    @endforeach
+    @if (Auth::check())
         <div class="card mb-4">
             <div class="card-header">Написать комментарий</div>
 
@@ -61,18 +71,7 @@
                 </form>
             </div>
         </div>
-
-        @foreach ($ticket->comments as $comment)
-            <div class="card mb-4 {{ $comment->admin_only ? 'border-secondary' : '' }}">
-                <div class="card-header d-flex justify-content-between">
-                    <div>{{ $comment->user->name }}</div>
-
-                    <div class="text-secondary">{{ $comment->created_at }}</div>
-                </div>
-
-                <div class="card-body">{{ $comment->content }}</div>
-            </div>
-        @endforeach
+    @endif
     </div>
 </div>
 @endsection

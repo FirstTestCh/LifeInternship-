@@ -20,7 +20,7 @@ class TicketController extends Controller
         if (is_null($ticket)) {
             abort(404);
         }
-        if (Auth::user()->isAdmin() && $ticket->ticket_status == 1) {
+        if (Auth::user() && Auth::user()->isAdmin() && $ticket->ticket_status == 1) {
             $ticket->ticket_status = 2;
             $ticket->save();
         }

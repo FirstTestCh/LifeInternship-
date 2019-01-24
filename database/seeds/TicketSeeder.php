@@ -24,7 +24,6 @@ class TicketSeeder extends Seeder
         use($statuses, $categories, $users) {
            $ticket->ticket_category = $categories->random()->id;
            $ticket->ticket_status = $statuses->random()->id;
-           $ticket->user_id = $users->random()->id;
            if ($ticket->status->id >= 3) {
              $ticket->admin_id = $users->random()->id;
            }
