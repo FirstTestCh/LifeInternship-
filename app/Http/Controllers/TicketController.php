@@ -92,9 +92,12 @@ class TicketController extends Controller
         if ($comment->admin_only == false && Auth::check() && Auth::user()->isAdmin()) {
             $ticket->ticket_status = 4;
             $ticket->save();
+            $messageRaw="Вам ответили на почту";
+            MailSender::send($messageRaw,  $hash);
+
             //have to email ?
         }
-        
+
 
         return redirect('/ticket/' . $hash);
     }

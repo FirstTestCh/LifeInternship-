@@ -54,10 +54,9 @@ class NewTicketController extends Controller
         }
         $hash = $ticket->hash;
         $messageRaw = "Спасибо за обращение в службу технической поддержки ChocoLife. Можете отслеживать ваш запрос здесь:";
-        $mailTo = Auth::user()->email;
         $ticket->user_id = Auth::user()->id;
         $ticket->save();
-        MailSender::send($messageRaw, $mailTo, $hash);
+        MailSender::send($messageRaw, $hash);
         return redirect('/ticket/' . $hash);
     }
 }
