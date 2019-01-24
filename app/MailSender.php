@@ -8,7 +8,7 @@ use Auth;
 class MailSender
 {
 
-    public static function send($messageRaw,  $hash)
+    public static function send($messageRaw, $hash)
     {
         $ticket = Ticket::where('hash', $hash)->first();
         if (is_null($ticket)) {
@@ -18,7 +18,7 @@ class MailSender
         $category = $ticket->category->name;
         $mailFrom = "lifeintern@mail.ru";
         $mailTo = $ticket->email;
-        Mail::raw($messageRaw.$hashLink, function ($message) use ($mailFrom, $mailTo, $category) {
+        Mail::raw($messageRaw . $hashLink, function ($message) use ($mailFrom, $mailTo, $category) {
             $message->from($mailFrom);
             $message->to($mailTo)->subject("Ответ на ваш $category");
         });
