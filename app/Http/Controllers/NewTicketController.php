@@ -54,7 +54,7 @@ class NewTicketController extends Controller
             $ticket->file_path = $file_name;
         }
         $hash = $ticket->hash;
-        $messageRaw = "Спасибо за обращение в службу технической поддержки ChocoLife. Можете отслеживать ваш запрос здесь:";
+        $messageRaw = "Спасибо за обращение в службу поддержки ChocoLife. Можете отслеживать ваш запрос здесь: ";
 
         $ticket->save();
         MailSender::send($messageRaw, $hash);
