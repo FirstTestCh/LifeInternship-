@@ -12,9 +12,6 @@
                 <ul>
                     <li>Email: {{$ticket->email}}</li>
                     <li>Номер: {{$ticket->phone_num}}</li>
-                    @if ($ticket->file) 
-                        <li>{{$ticket->file}}</li>
-                    @endif
                     <li>Категория: {{$ticket->category->name}}</li>
                     <li class="{{ $ticket->statusColor() }}">Статус: {{$ticket->status->name}}</li>
                     @if ($ticket->admin_id)

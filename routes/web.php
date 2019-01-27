@@ -23,8 +23,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ticket/{ticket}/attachment', 'TicketController@attachment')->name('ticket.attachment');
     Route::get('/search/ticket', 'TicketController@search')->name('ticket.search');
     
-    Route::resource('ticket-categories', 'TicketCategoriesController')->middleware('can:access-categories');
+    Route::resource('ticketCategories', 'TicketCategoriesController')->middleware('can:access-categories');
 });
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/tickets', 'HomeController@index_api')->name('index_api');

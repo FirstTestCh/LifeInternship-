@@ -46,43 +46,39 @@
                         </div>
                     </form>
 
-                    @if ($tickets->count() > 0)
-                        @foreach ($tickets as $ticket)
-                            <div class="card {{ $loop->last ? '' : 'mb-3' }}">
-                                <div class="card-header d-flex justify-content-between text-primary">
-                                    <div class="text-secondary">{{ $ticket->created_at }}</div>
+                    <div id="tickets">
+                        @if ($tickets->count() > 0)
+                            @foreach ($tickets as $ticket)
+                                <div class="card {{ $loop->last ? '' : 'mb-3' }}">
+                                    <div class="card-header d-flex justify-content-between text-primary">
+                                        <div class="text-secondary">{{ $ticket->created_at }}</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul>
+                                            <li>Имя: {{ $ticket->full_name }}</li>
+                                            <li>Email: {{$ticket->email}}</li>
+                                            <li>Номер: {{$ticket->phone_num}}</li>
+                                            <li>Категория: {{$ticket->category->name}}</li>
+                                            <li class="{{ $ticket->statusColor() }}">Статус: {{$ticket->status->name}}</li>
+                                            @if ($ticket->admin_id)
+                                                <li>Админ: {{ $ticket->admin->name }}</li>
+                                            @endif
+                                        </ul>
+                                        <p>Описание</p>
+                                        <p>{{$ticket->description}}</p>
+                                        <a class="btn btn-primary" href="/ticket/{{$ticket->hash}}">Посмотреть</a>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <ul>
-                                        <li>Имя:{{ $ticket->full_name }}</li>
-                                        <li>Email: {{$ticket->email}}</li>
-                                        <li>Номер: {{$ticket->phone_num}}</li>
-                                        @if ($ticket->file) 
-                                            <li>{{$ticket->file}}</li>
-                                        @endif
-                                        <li>Категория: {{$ticket->category->name}}</li>
-                                        <li class="{{ $ticket->statusColor() }}">Статус: {{$ticket->status->name}}</li>
-                                        @if ($ticket->admin_id)
-                                            <li>Админ: {{ $ticket->admin->name }}</li>
-                                        @endif
-                                    </ul>
-                                    <p>Описание</p>
-                                    <p>{{$ticket->description}}</p>
-                                    @if (Auth::user() && Auth::user()->isAdmin())
-                                        <a href="/ticket/{{$ticket->hash}}"><button>Ответить</button></a>
-                                    @else
-                                        <a href="/ticket/{{$ticket->hash}}"><button>Посмотреть</button></a>
-                                    @endif
-                                </div>
-                            </div>
-                        @endforeach 
-                    @else
-                        <div>Пусто :(</div>
-                    @endif
+                            @endforeach 
+                        @else
+                            <div>Пусто :(</div>
+                        @endif
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
 {{-- </div> --}}
+<script src="{{ asset('js/update.js') }}" defer></script>
 @endsection

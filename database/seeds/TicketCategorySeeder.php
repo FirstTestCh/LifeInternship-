@@ -11,7 +11,6 @@ class TicketCategorySeeder extends Seeder
      */
     public function run()
     {
-        // не менять!!! а то приду и убью
         // factory(App\Models\TicketCategory::class, 5)->create();
         DB::table('ticket_category')->insert([
             ['name' => 'Вопрос'],
@@ -20,7 +19,7 @@ class TicketCategorySeeder extends Seeder
             ['name' => 'Проблема с оплатой купона'],
             ['name' => 'Проблема с участием в акции'],
             ['name' => 'Вопрос по рассылке'],
-            ['name' => 'Запрос на возвраст'],
+            ['name' => 'Запрос на возврат'],
             ['name' => 'Другое'],
         ]);
     }

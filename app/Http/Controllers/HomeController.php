@@ -36,4 +36,11 @@ class HomeController extends Controller
             'statuses' => $ticketStatuses
         ]);
     }
+
+    public function index_api()
+    {
+        $tickets = Ticket::with('status')->with('category')->with('admin')->orderBy('created_at','desc')->orderBy('ticket_status')->get();
+
+        return $tickets;
+    }
 }
