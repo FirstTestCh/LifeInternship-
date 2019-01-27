@@ -12,9 +12,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Eloquent::unguard();
-        
+
         $this->call(TicketStatusSeeder::class);
-        
+
         if (App::environment() === 'local') //development
         {   
             // Admin
@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             $this->call(TicketCategorySeeder::class);
             $this->call(TicketSeeder::class);
         }
-        
-        
+
+
     }
 }

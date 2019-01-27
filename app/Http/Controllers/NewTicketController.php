@@ -44,7 +44,7 @@ class NewTicketController extends Controller
         $ticket->description = $request->get('description');
         $ticket->ticket_category = $request->get('category');
         $ticket->ticket_status = 1;
-        $mytime =  date('Y-m-d H:i:s');
+        $mytime = date('Y-m-d H:i:s');
         $ticket->hash = md5($ticket->id . $mytime . $ticket->full_name . $ticket->email);
 
         if ($request->hasFile('attachment')) {
@@ -55,9 +55,9 @@ class NewTicketController extends Controller
         }
         $hash = $ticket->hash;
         $messageRaw = "Спасибо за обращение в службу технической поддержки ChocoLife. Можете отслеживать ваш запрос здесь:";
-        
+
         $ticket->save();
         MailSender::send($messageRaw, $hash);
-        return redirect()->route('ticket.index', [ 'hash'=> $hash ]);
+        return redirect()->route('ticket.index', ['hash' => $hash]);
     }
 }

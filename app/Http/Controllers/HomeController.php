@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::with('status')->with('category')->orderBy('updated_at','desc')->orderBy('ticket_status')->get();
+        $tickets = Ticket::with('status')->with('category')->orderBy('updated_at', 'desc')->orderBy('ticket_status')->get();
         $ticketCategories = TicketCategory::all();
         $ticketStatuses = TicketStatus::all();
 
@@ -39,7 +39,7 @@ class HomeController extends Controller
 
     public function index_api()
     {
-        $tickets = Ticket::with('status')->with('category')->with('admin')->orderBy('updated_at','desc')->orderBy('ticket_status')->get();
+        $tickets = Ticket::with('status')->with('category')->with('admin')->orderBy('updated_at', 'desc')->orderBy('ticket_status')->get();
 
         return $tickets;
     }

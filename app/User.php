@@ -11,7 +11,8 @@ class User extends Authenticatable
     use Notifiable;
 
 
-    public function isAdmin(){
+    public function isAdmin()
+    {
         return $this->role == 0;
     }
     /**

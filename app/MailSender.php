@@ -18,9 +18,9 @@ class MailSender
         $category = $ticket->category->name;
         $mailFrom = "lifeintern@mail.ru";
         $mailTo = $ticket->email;
-        Mail::raw($messageRaw . $hashLink, function ($message) use ($mailFrom, $mailTo, $category) {
+        Mail::raw($messageRaw . $hashLink, function ($message) use ($mailFrom, $mailTo, $ticket) {
             $message->from($mailFrom);
-            $message->to($mailTo)->subject("Ответ на ваш $category");
+            $message->to($mailTo)->subject("Тикет $ticket->id");
         });
     }
 

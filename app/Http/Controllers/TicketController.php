@@ -63,20 +63,21 @@ class TicketController extends Controller
         $comment = new Comment;
 
         $comment->content = request('content');
-        $comment->ticket_id = $ticket->id;
-        $comment->user_id = Auth::check() ? Auth::user()->id : null;
-        $comment->admin_only = request('admin_only') ? true : false;
-        $comment->save();
+        if (!is_null($comment->content)) {
+            $comment->ticket_id = $ticket->id;
+            $comment->user_id = Auth::check() ? Auth::user()->id : null;
+            $comment->admin_only = request('admin_only') ? true : false;
+            $comment->save();
 
-        if ($comment->admin_only == false && Auth::check() && Auth::user()->isAdmin()) {
-            $ticket->ticket_status = 4;
-            $ticket->save();
-            $messageRaw="Вам ответили на почту";
-            MailSender::send($messageRaw,  $ticket->hash);
+            if ($comment->admin_only == false && Auth::check() && Auth::user()->isAdmin()) {
+                $ticket->ticket_status = 4;
+                $ticket->save();
+                $messageRaw = "Вам ответили на почту";
+                MailSender::send($messageRaw, $ticket->hash);
 
             //have to email ?
+            }
         }
-
 
         return redirect('/ticket/' . $ticket->hash);
     }

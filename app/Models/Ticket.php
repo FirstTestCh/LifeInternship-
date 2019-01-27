@@ -10,17 +10,17 @@ class Ticket extends Model
 
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment','ticket_id','id')->orderBy('created_at');
+        return $this->hasMany('App\Models\Comment', 'ticket_id', 'id')->orderBy('created_at');
     }
 
     public function category()
     {
-        return $this->belongsTo('App\Models\TicketCategory','ticket_category','id');
+        return $this->belongsTo('App\Models\TicketCategory', 'ticket_category', 'id');
     }
-    
+
     public function status()
     {
-        return $this->belongsTo('App\Models\TicketStatus','ticket_status','id');
+        return $this->belongsTo('App\Models\TicketStatus', 'ticket_status', 'id');
     }
 
     public function user()
@@ -35,16 +35,16 @@ class Ticket extends Model
 
     public function statusColor()
     {
-        switch($this->status()->first()->id) {
-            case(1):
+        switch ($this->status()->first()->id) {
+            case (1):
                 return "text-primary";
-            case(2):
+            case (2):
                 return "text-info";
-            case(3):
+            case (3):
                 return "text-danger";
-            case(4):
+            case (4):
                 return "text-success";
-            case(5):
+            case (5):
                 return "text-muted";
         }
     }
