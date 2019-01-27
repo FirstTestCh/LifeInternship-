@@ -51,7 +51,7 @@ class TicketController extends Controller
 
         $request->flash();
 
-        return view('home', [
+        return view('search', [
             'tickets' => $tickets,
             'categories' => $ticketCategories,
             'statuses' => $ticketStatuses
@@ -86,6 +86,15 @@ class TicketController extends Controller
         $ticket->ticket_status = 3;
         $ticket->admin_id = Auth::user()->id;
         $ticket->save();
+        return back();
+    }
+
+    public function close(Request $request, Ticket $ticket)
+    {
+        $ticket->ticket_status = 5;
+        $ticket->admin_id = Auth::user()->id;
+        $ticket->save();
+
         return back();
     }
 

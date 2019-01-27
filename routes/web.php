@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/ticket/{ticket}', 'TicketController@comment')->name('ticket.comment');
     Route::post('/ticket/{ticket}/process', 'TicketController@process')->name('ticket.process');
+    Route::post('/ticket/{ticket}/close', 'TicketController@close')->name('ticket.close');
     Route::get('/ticket/{ticket}/attachment', 'TicketController@attachment')->name('ticket.attachment');
     Route::get('/search/ticket', 'TicketController@search')->name('ticket.search');
     
