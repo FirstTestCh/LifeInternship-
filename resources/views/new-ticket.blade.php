@@ -49,7 +49,8 @@
 
                           <div class="form-group">  
                             <label for="exampleFormControlFile1">Файлы для прикрепления:</label>
-                            <input type="file" class="form-control-file" name="attachment" id="exampleFormControlFile1">
+                            <div class="form-text text-danger">{{$errors->first('attachment')}}</div>    
+                            <input type="file" class="form-control-file"  name="attachment" id="exampleFormControlFile1">
                           </div>
 
                           <button class="btn btn-primary" type="submit" name="submit">Создать Тикет</button>

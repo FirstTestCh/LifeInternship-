@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class TicketCategoriesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,13 +32,11 @@ class TicketCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
+        $attributes = request()->validate([
             'name' => 'required'
         ]);
 
-        TicketCategory::create([
-            'name' => request('name')
-        ]);
+        TicketCategory::create($attributes);
 
         return back();
     }
@@ -58,13 +61,11 @@ class TicketCategoriesController extends Controller
      */
     public function update(Request $request, TicketCategory $ticketCategory)
     {
-        request()->validate([
+        $attributes = request()->validate([
             'name' => 'required'
         ]);
 
-        $ticketCategory->update([
-            'name' => request('name')
-        ]);
+        $ticketCategory->update($attributes);
 
         return redirect('/ticketCategories');
     }

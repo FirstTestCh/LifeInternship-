@@ -12,22 +12,31 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Eloquent::unguard();
-        
+
         $this->call(TicketStatusSeeder::class);
-        
+
         if (App::environment() === 'local') //development
-        {
-            $this->call(TicketCategorySeeder::class);
-            $this->call(TicketSeeder::class);
-            
-            // one user for testing
+        {   
+            // Admin
             DB::table('users')->insert([
-                'email' => 'life@chocolife.me',
+                'email' => 'admin@chocolife.me',
                 'name' => 'life',
                 'password' => Hash::make('secret'),
+                'role' => 0,
             ]);
+
+            // SZP Admin
+            DB::table('users')->insert([
+                'email' => 'szp@chocolife.me',
+                'name' => 'life',
+                'password' => Hash::make('secret'),
+                'role' => 1,
+            ]);
+
+            $this->call(TicketCategorySeeder::class);
+            $this->call(TicketSeeder::class);
         }
-        
-        
+
+
     }
 }

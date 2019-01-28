@@ -4,6 +4,8 @@
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 			<div class="card">
+				<a class="card-header" href="/ticketCategories">Назад</a>
+
 				<div class="card-body">
 					<form method="POST" action="/ticketCategories/{{ $ticketCategory->id }}">
 						@method('PATCH')
@@ -14,9 +16,10 @@
 							placeholder="Name" value="{{ old('name') ? old('name') : $ticketCategory->name }}">
 
 							<div class="input-group-append">
-								<button class="btn btn-outline-primary">Edit</button>
+								<button class="btn btn-outline-primary">Изменить</button>
 
-								<button class="btn btn-outline-danger" type="button" onclick="document.getElementById('delete').submit();">Delete</button>
+								<button class="btn btn-outline-danger" type="button"
+								onclick="document.getElementById('delete').submit();">Удалить</button>
 							</div>
 						</div>
 					</form>
